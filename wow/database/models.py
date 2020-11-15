@@ -75,6 +75,10 @@ class CharacterModel(Base, CoreModel):
     level = Column(Integer)
     gender = Column(String)
     faction = Column(String)
+    gear = Column(Integer, default=0)
+
+    guild_role = Column(Integer, default=0)
+    meta_text = Column(String, default='')
 
     role_index = Column(Integer, ForeignKey("characters_roles.role_index"))
     role = relationship("CharacterRoleModel")

@@ -18,6 +18,7 @@ from wow.blizzard.core import blizzard_db
 from wow.database.models import CharacterModel, CharacterEquipmentModel, MythicRaceMembersModel, MythicRaceModel, \
     MythicRaceAffixesModel
 from wow.interface.blizzard_api import BlizzardAPI
+from wow.interface.entity import CharacterCountableSlots
 from wow.utils.mythic_utils import MythicUtils
 
 
@@ -61,7 +62,13 @@ class CharacterUpdater:
         db.query(CharacterEquipmentModel) \
             .filter(CharacterEquipmentModel.character_id == data[0].character_id).delete()
 
+        k = 0
+        ks = 0
         for item in data:
+            if item.slot in CharacterCountableSlots:
+                k += item.level
+                ks = ks + 1
+
             db.add(CharacterEquipmentModel(
                 title=item.title,
                 wow_id=item.wow_id,
@@ -80,6 +87,8 @@ class CharacterUpdater:
             ))
             bar.next()
             time.sleep(1 / 1000)
+        gear = round(k / ks)
+        db.query(CharacterModel).filter(CharacterModel.name == name).update({'gear': gear})
         db.commit()
 
     @staticmethod
@@ -163,3 +172,15 @@ class CharacterUpdater:
             CharacterUpdater.update_mythic_character(name)
             bar.next()
         print("")
+
+    @staticmethod
+    def update_guild_role(name: str, role: int):
+        db = blizzard_db()
+        db.query(CharacterModel).filter(CharacterModel.name == name).update({'guild_role': role})
+        db.commit()
+
+    @staticmethod
+    def update_meta(name: str, meta: str):
+        db = blizzard_db()
+        db.query(CharacterModel).filter(CharacterModel.name == name).update({'meta_text': meta})
+        db.commit()

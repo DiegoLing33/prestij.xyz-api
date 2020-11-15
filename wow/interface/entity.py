@@ -12,7 +12,7 @@ from typing import Optional, List
 from pydantic import BaseModel
 
 CharacterEquipmentTypesList = [
-    "HEAD", "NECK", "SHOULDER", "CHEST",
+    "HEAD", "NECK", "SHOULDER", "CHEST", "SHIRT"
 
     # Пояс
     "WAIST",
@@ -40,6 +40,11 @@ CharacterEquipmentTypesList = [
     "TABARD",
 ]
 
+CharacterCountableSlots = [
+    "HEAD", "NECK", "SHOULDER", "CHEST", "WAIST", "LEGS", "FEET",
+    "WRIST", "HANDS", "FINGER_1", "FINGER_2", "TRINKET_1", "TRINKET_2",
+    "BACK", "MAIN_HAND", "OFF_HAND"
+]
 
 class CharacterEquipment(BaseModel):
     """
@@ -113,6 +118,9 @@ class Character(BaseModel):
     name: str
     gender: str
     level: int
+    gear: Optional[int]
+    meta_text: Optional[str]
+    guild_role: Optional[str]
 
     role_index: Optional[int]
     role: Optional[CharacterRole]
