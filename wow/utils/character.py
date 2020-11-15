@@ -62,3 +62,17 @@ def get_role_by_spec_id(spec_id):
 
 def get_role_name_by_id(role_type):
     return role_names[role_type]
+
+
+class CharactersSorter:
+    """
+    Characters sorter utility
+    """
+
+    @staticmethod
+    def by_name(characters):
+        return sorted(characters, key=lambda x: x['name'])
+
+    @staticmethod
+    def by_role_id(characters):
+        return sorted(characters, key=lambda x: x['role_id'])

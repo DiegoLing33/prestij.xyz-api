@@ -9,3 +9,4 @@
 #  @site http://ling.black
 
 from .character import CharacterAPI
+from .mythic import MythicAPI

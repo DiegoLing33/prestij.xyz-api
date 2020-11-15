@@ -1,0 +1,2 @@
+### Gets all the values
+GET http://localhost:8000/mythic/list
