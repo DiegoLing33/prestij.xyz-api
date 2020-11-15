@@ -47,10 +47,10 @@ For example it uses `http://server.prestij.xyz` domain
   
 - Get the guild mythic races data
     ```
-    GET http://server.prestij.xyz/myhtic/list
+    GET http://server.prestij.xyz/mythic/list
     ```
     ```
-    GET http://server.prestij.xyz/myhtic/list?offset=100&limit=100
+    GET http://server.prestij.xyz/mythic/list?offset=100&limit=100
     ```
   *(Use `offset` and `limit` URL params to manipulate the data)*
   
