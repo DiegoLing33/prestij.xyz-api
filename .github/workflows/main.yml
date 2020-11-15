@@ -1,0 +1,16 @@
+on: push
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: server.prestij.xyz
+        username: root
+        password: ${{ secrets.password }}
+        server-dir: /home/diego/prestij
+        protocol: ftps
+        port: 22
