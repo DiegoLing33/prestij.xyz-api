@@ -17,7 +17,7 @@ Application has it own crony entry point. Just use `python -m cron` and pass arg
 ## Console UI
 <img src="assets/screen.png" alt="Screen" />
 
-Use arrows and 'enter' to select the action. Cron described above is the text version of this UI.
+Use **arrows** and **enter** to select the action. Cron described above is the text version of this UI.
 
 ## API methods
 
