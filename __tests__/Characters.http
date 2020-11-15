@@ -1,0 +1,7 @@
+### Sending meta text changes
+PUT http://localhost:8000/characters/meta/Дайкирия
+Content-Type: application/json
+
+{
+  "text": "144"
+}
