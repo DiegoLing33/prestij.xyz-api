@@ -15,7 +15,7 @@ Application has it own crony entry point. Just use `python -m cron` and pass arg
 - `force__all` - does everything above. **IMPORTANT!** try to avoid usage of this argument!
 
 ## Console UI
-<img src="assets/screen0.png" alt="Screen" />
+<img src="https://github.com/DiegoLing33/prestij.xyz-api/blob/prestij.xyz-api/assets/sceen0.png?raw=true" alt="Screen" />
 
 Use **arrows** and **enter** to select the action. Cron described above is the text version of this UI.
 
