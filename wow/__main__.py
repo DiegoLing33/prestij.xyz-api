@@ -46,6 +46,7 @@ def menu_updater():
         'Static data, like classes, races, etc',
         'Only guild information',
         'Only guild members',
+        'Only guild members mythic',
         'All dynamic data'
         'Everything at all!',
         'I want to back',
@@ -64,13 +65,16 @@ def menu_updater():
         CharacterUpdater.update_characters()
         return menu_press_enter_and_back()
     if choice is options[3]:
+        CharacterUpdater.update_characters_mythic()
+        return menu_press_enter_and_back()
+    if choice is options[4]:
         GuildUpdater.update_info()
         time.sleep(1)
         CharacterUpdater.update_characters()
         return menu_press_enter_and_back()
-    if choice is options[4]:
-        return menu_press_enter_and_back()
     if choice is options[5]:
+        return menu_press_enter_and_back()
+    if choice is options[6]:
         menu_root()
 
 

@@ -10,7 +10,7 @@
 from urllib.parse import quote
 
 from wow.blizzard.core import default_params, blizzard_request
-from wow.config import guild_name, server_slug, mythic_season
+from config import server_slug, mythic_season
 
 
 def blizzard_character(

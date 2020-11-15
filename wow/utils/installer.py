@@ -11,7 +11,7 @@
 import os
 from logzero import logger
 
-from wow.config import default_static_path, default_items_images_path, default_characters_images_path
+from config import default_static_path, default_items_images_path, default_characters_images_path
 
 
 def wow_install():

@@ -10,7 +10,7 @@
 from urllib.parse import quote
 
 from wow.blizzard.core import blizzard_request, default_params
-from wow.config import guild_name, server_slug
+from config import guild_name, server_slug
 
 
 def blizzard_guild_roster(guild: str = guild_name, data=default_params, sleep: int = 10):

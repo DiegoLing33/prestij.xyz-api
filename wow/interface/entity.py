@@ -136,3 +136,49 @@ class Character(BaseModel):
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True
+
+
+class MythicRaceMember(BaseModel):
+    wow_id: int
+    name: str
+
+    spec_id: int
+    spec: Optional[CharacterActiveSpec]
+
+    mythic_hash: str
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True
+
+
+class MythicRaceAffix(BaseModel):
+    wow_id: int
+    name: str
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True
+
+
+class MythicRace(BaseModel):
+    mythic_hash: str
+    team_hash: str
+    affixes_hash: str
+
+
+    wow_dung_id: int
+    name: str
+
+    completed: int
+    duration: int
+    duration_string: str
+
+    done_in_time: bool
+
+    members: Optional[List[MythicRaceMember]]
+    affixes: Optional[List[MythicRaceAffix]]
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True

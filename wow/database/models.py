@@ -7,7 +7,7 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
-from sqlalchemy import Column, Integer, ForeignKey, String
+from sqlalchemy import Column, Integer, ForeignKey, String, Boolean
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -92,3 +92,47 @@ class CharacterModel(Base, CoreModel):
     guild_id = Column(Integer)
 
     equipment = relationship("CharacterEquipmentModel", back_populates="character")
+
+
+class MythicRaceAffixesModel(Base, CoreModel):
+    __tablename__ = "mythic_races_affixes"
+
+    mythic_hash = Column(String, ForeignKey("mythic_races.mythic_hash"))
+    wow_id = Column(Integer)
+    name = Column(String)
+
+    mythic = relationship("MythicRaceModel", back_populates="affixes")
+
+
+class MythicRaceMembersModel(Base, CoreModel):
+    __tablename__ = 'mythic_races_members'
+
+    mythic_hash = Column(String, ForeignKey("mythic_races.mythic_hash"))
+
+    wow_id = Column(Integer)
+    name = Column(String)
+
+    spec_id = Column(Integer, ForeignKey('characters_specs.wow_id'))
+    spec = relationship('CharacterSpecModel')
+
+    mythic = relationship("MythicRaceModel", back_populates="members")
+
+
+class MythicRaceModel(Base, CoreModel):
+    __tablename__ = "mythic_races"
+
+    team_hash = Column(String)
+    affixes_hash = Column(String)
+    mythic_hash = Column(String)
+
+    wow_dung_id = Column(Integer)
+    name = Column(String)
+
+    completed = Column(Integer)
+    duration = Column(Integer)
+    duration_string = Column(String)
+
+    done_in_time = Column(Boolean)
+
+    members = relationship("MythicRaceMembersModel", back_populates="mythic")
+    affixes = relationship("MythicRaceAffixesModel", back_populates="mythic")

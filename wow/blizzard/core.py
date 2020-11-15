@@ -15,7 +15,7 @@ import requests
 
 from database import get_db
 from database.client import DataStore
-from wow.config import client_id, client_secret, blizzard_api_url, default_namespace
+from config import client_id, client_secret, blizzard_api_url, default_namespace
 
 
 def blizzard_db():

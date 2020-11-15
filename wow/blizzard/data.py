@@ -10,7 +10,7 @@
 from urllib.parse import quote
 
 from wow.blizzard.core import default_params, blizzard_request
-from wow.config import default_static_namespace
+from config import default_static_namespace
 
 
 def blizzard_data_class(

@@ -13,7 +13,8 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
-from wow.router import character, guild
+from config import app_server, app_port
+from wow.router import character, guild, mythic
 from database.database import engine, Base
 from middleware import use_content_type
 from routers import users, groups, auth, users_meta, data
@@ -97,9 +98,14 @@ app.include_router(
     prefix="/guild",
     tags=['wow']
 )
+app.include_router(
+    mythic.router,
+    prefix="/mythic",
+    tags=['wow']
+)
 
 app.mount("/static", StaticFiles(directory="static"))
 
 # Entry point
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="server.prestij.xyz", port=80, reload=True)
+    uvicorn.run("main:app", host=app_server, port=app_port, reload=True)

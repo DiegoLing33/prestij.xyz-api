@@ -9,11 +9,16 @@
 #  @site http://ling.black
 import logging
 import time
+import sys
 from datetime import datetime
 
 import logzero
 
 from wow.updater import GuildUpdater, CharacterUpdater, MediaUpdater
+
+
+def has_arg(a: str):
+    return a in sys.argv
 
 
 def run_cron_operation():
@@ -25,19 +30,30 @@ def run_cron_operation():
     logzero.logfile(f"logs/{datetime.now().strftime('%d.%m.%Y-%H:%M:%S')}-rotating.log", maxBytes=1e6, backupCount=3)
 
     # Update info first
-    GuildUpdater.update_info()
-    time.sleep(1)
+    if has_arg('info') or has_arg('guild') or has_arg('force__all'):
+        GuildUpdater.update_info()
+        time.sleep(1)
 
     # Then update players
-    CharacterUpdater.update_characters()
-    time.sleep(1)
+    if has_arg('characters') or has_arg('guild') or has_arg('force__all'):
+        CharacterUpdater.update_characters()
+        time.sleep(1)
+
+    # Then update players mythic
+    if has_arg('mythic') or has_arg('guild') or has_arg('force__all'):
+        CharacterUpdater.update_characters_mythic()
+        time.sleep(1)
 
     # And for the end update images
-    MediaUpdater.update_characters_images()
-    time.sleep(1)
-    MediaUpdater.update_items_images()
-    time.sleep(1)
+    if has_arg('avatars') or has_arg('media') or has_arg('force__all'):
+        MediaUpdater.update_characters_images()
+        time.sleep(1)
+
+    if has_arg('items') or has_arg('media') or has_arg('force__all'):
+        MediaUpdater.update_items_images()
+        time.sleep(1)
 
 
 if __name__ == "__main__":
     run_cron_operation()
+    pass

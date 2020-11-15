@@ -16,7 +16,7 @@ from progress.bar import Bar
 from core.url import LSAURL
 from wow.blizzard import blizzard_character_media
 from wow.blizzard.core import blizzard_media
-from wow.config import default_items_images_path, default_characters_images_path
+from config import default_items_images_path, default_characters_images_path
 
 
 class MediaDownloader:
