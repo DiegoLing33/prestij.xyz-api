@@ -14,6 +14,7 @@ import pyfiglet
 import enquiries
 
 from database import engine, Base
+from wow.updater.activity import PlayersActivityUpdater
 from wow.updater.mythic import MythicUpdater
 from wow.updater.static import StaticUpdater
 from wow.updater import MediaUpdater, CharacterUpdater
@@ -48,6 +49,7 @@ def menu_updater():
         'Only guild information',
         'Only guild members',
         'Only guild members mythic',
+        'Only guild members activity',
         'All dynamic data'
         'Everything at all!',
         'I want to back',
@@ -69,15 +71,18 @@ def menu_updater():
         MythicUpdater.update_characters_mythic()
         return menu_press_enter_and_back()
     if choice is options[4]:
+        PlayersActivityUpdater.update()
+        return menu_press_enter_and_back()
+    if choice is options[5]:
         GuildUpdater.update_info()
         time.sleep(1)
         CharacterUpdater.update_characters()
         time.sleep(1)
         MythicUpdater.update_characters_mythic()
         return menu_press_enter_and_back()
-    if choice is options[5]:
-        return menu_press_enter_and_back()
     if choice is options[6]:
+        return menu_press_enter_and_back()
+    if choice is options[7]:
         menu_root()
 
 

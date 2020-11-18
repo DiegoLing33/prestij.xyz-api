@@ -14,7 +14,7 @@ from datetime import datetime
 
 import logzero
 
-from wow.updater import GuildUpdater, CharacterUpdater, MediaUpdater
+from wow.updater import GuildUpdater, CharacterUpdater, MediaUpdater, PlayersActivityUpdater
 from wow.updater.mythic import MythicUpdater
 
 
@@ -43,6 +43,11 @@ def run_cron_operation():
     # Then update players mythic
     if has_arg('mythic') or has_arg('guild') or has_arg('force__all'):
         MythicUpdater.update_characters_mythic()
+        time.sleep(1)
+
+    # Then update players activity
+    if has_arg('activity') or has_arg('guild') or has_arg('force__all'):
+        PlayersActivityUpdater.update()
         time.sleep(1)
 
     # And for the end update images

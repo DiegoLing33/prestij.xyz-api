@@ -92,6 +92,8 @@ class CharacterModel(Base, CoreModel):
     character_spec_id = Column(Integer, ForeignKey("characters_specs.wow_id"))
     character_spec = relationship("CharacterSpecModel")
 
+    activity = Column(Integer, default=0)
+
     realm_id = Column(Integer)
     guild_id = Column(Integer)
 
@@ -130,6 +132,8 @@ class MythicRaceModel(Base, CoreModel):
     team_hash = Column(String)
     affixes_hash = Column(String)
     mythic_hash = Column(String)
+
+    level = Column(Integer)
 
     wow_dung_id = Column(Integer)
     name = Column(String)

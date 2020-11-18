@@ -5,3 +5,12 @@ Content-Type: application/json
 {
   "text": "144"
 }
+
+
+### Getting character
+GET http://localhost:8000/characters/дайкирия
+Accept: application/json
+
+### Guild activity
+GET http://localhost:8000/guild/activity
+Accept: application/json

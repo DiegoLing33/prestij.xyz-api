@@ -15,7 +15,7 @@ CharacterEquipmentTypesList = [
     "HEAD", "NECK", "SHOULDER", "CHEST", "SHIRT"
 
     # Пояс
-    "WAIST",
+                                         "WAIST",
     "LEGS",
 
     # Ступни
@@ -45,6 +45,7 @@ CharacterCountableSlots = [
     "WRIST", "HANDS", "FINGER_1", "FINGER_2", "TRINKET_1", "TRINKET_2",
     "BACK", "MAIN_HAND", "OFF_HAND"
 ]
+
 
 class CharacterEquipment(BaseModel):
     """
@@ -139,6 +140,8 @@ class Character(BaseModel):
     realm_id: int
     guild_id: int
 
+    activity: int
+
     equipment: Optional[List[CharacterEquipment]]
 
     class Config:
@@ -176,10 +179,11 @@ class MythicRace(BaseModel):
     team_hash: str
     affixes_hash: str
 
-
     wow_dung_id: int
     name: str
     guild_race: int
+
+    level: int
 
     completed: int
     duration: int

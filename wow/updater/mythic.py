@@ -59,6 +59,7 @@ class MythicUpdater:
                     duration_string=item['duration']['format'],
                     done_in_time=item['done_in_time'],
                     guild_race=g_race,
+                    level=item['keystone_level']
                 ))
                 db.commit()
 
@@ -85,6 +86,6 @@ class MythicUpdater:
         bar = Bar('Characters mythic updating', max=len(data), fill='█')
         for member in data:
             name = member.name
-            CharacterUpdater.update_mythic_character(name)
+            MythicUpdater.update_mythic_character(name)
             bar.next()
         print("")
