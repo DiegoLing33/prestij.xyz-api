@@ -24,7 +24,7 @@ class ChMetaAdd(BaseModel):
 
 
 @router.get(
-    "/list",
+    "/",
     response_model=CharacterAPIListResponse,
     summary="Returns all characters in the guild with equipment and extra data"
 )

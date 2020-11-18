@@ -26,7 +26,19 @@ router = APIRouter()
     response_model=List[DataStoreType]
 )
 def guild_get_info(db=Depends(get_db)):
-    return DataStore.list(db)
+    return list(filter(lambda x: x.field != 'token', DataStore.list(db)))
+
+
+@router.get(
+    "/object",
+    summary="Returns the guild info",
+)
+def guild_get_info_object(db=Depends(get_db)):
+    o = {}
+    for it in DataStore.list(db):
+        if it.field != 'token':
+            o[it.field] = it.value
+    return o
 
 
 @router.get(

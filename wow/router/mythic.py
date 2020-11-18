@@ -19,7 +19,7 @@ router = APIRouter()
 
 
 @router.get(
-    "/list",
+    "/",
     response_model=MythicAPIListResponse,
     summary="Returns all mythic races in the guild"
 )
