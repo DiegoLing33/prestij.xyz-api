@@ -12,3 +12,4 @@ from .media import MediaUpdater
 from .static import StaticUpdater
 from .character import CharacterUpdater
 from .guild import GuildUpdater
+from .mythic import MythicUpdater
