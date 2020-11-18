@@ -14,6 +14,7 @@ import pyfiglet
 import enquiries
 
 from database import engine, Base
+from wow.updater.mythic import MythicUpdater
 from wow.updater.static import StaticUpdater
 from wow.updater import MediaUpdater, CharacterUpdater
 from wow.updater.guild import GuildUpdater
@@ -65,14 +66,14 @@ def menu_updater():
         CharacterUpdater.update_characters()
         return menu_press_enter_and_back()
     if choice is options[3]:
-        CharacterUpdater.update_characters_mythic()
+        MythicUpdater.update_characters_mythic()
         return menu_press_enter_and_back()
     if choice is options[4]:
         GuildUpdater.update_info()
         time.sleep(1)
         CharacterUpdater.update_characters()
         time.sleep(1)
-        CharacterUpdater.update_characters_mythic()
+        MythicUpdater.update_characters_mythic()
         return menu_press_enter_and_back()
     if choice is options[5]:
         return menu_press_enter_and_back()
@@ -119,7 +120,7 @@ def menu_single():
         CharacterUpdater.update_character(name)
         return menu_press_enter_and_back()
     if choice is options[1]:
-        CharacterUpdater.update_mythic_character(name)
+        MythicUpdater.update_mythic_character(name)
         return menu_press_enter_and_back()
     if choice is options[2]:
         role = enquiries.freetext("Type guild role: ")
