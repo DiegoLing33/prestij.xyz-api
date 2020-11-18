@@ -118,6 +118,26 @@ class CharacterUpdater:
         logger.info("Starting update character mythic " + name)
         bar = Bar('Mythic updating', max=len(data), fill='█')
         for item in data:
+            g_race = 0
+            for member in item['members']:
+                ex_m = db.query(MythicRaceMembersModel) \
+                    .filter(MythicRaceMembersModel.mythic_hash == item['hashes']['mythic']) \
+                    .filter(MythicRaceMembersModel.wow_id == member['wow_id']).count()
+
+                from_g = db.query(CharacterModel).filter(CharacterModel.wow_id == member['wow_id']).count() > 0
+                if from_g:
+                    g_race = g_race + 1
+
+                if ex_m == 0:
+                    db.add(MythicRaceMembersModel(
+                        mythic_hash=item['hashes']['mythic'],
+                        wow_id=member['wow_id'],
+                        name=member['name'],
+                        spec_id=member['spec']['wow_id'],
+                        from_guild=from_g
+                    ))
+                    db.commit()
+
             ex = db.query(MythicRaceModel).filter(MythicRaceModel.mythic_hash == item['hashes']['mythic']).count()
             if ex == 0:
                 db.add(MythicRaceModel(
@@ -130,21 +150,9 @@ class CharacterUpdater:
                     duration=item['duration']['time'],
                     duration_string=item['duration']['format'],
                     done_in_time=item['done_in_time'],
+                    guild_race=g_race,
                 ))
                 db.commit()
-
-            for member in item['members']:
-                ex_m = db.query(MythicRaceMembersModel) \
-                    .filter(MythicRaceMembersModel.mythic_hash == item['hashes']['mythic']) \
-                    .filter(MythicRaceMembersModel.wow_id == member['wow_id']).count()
-                if ex_m == 0:
-                    db.add(MythicRaceMembersModel(
-                        mythic_hash=item['hashes']['mythic'],
-                        wow_id=member['wow_id'],
-                        name=member['name'],
-                        spec_id=member['spec']['wow_id']
-                    ))
-                    db.commit()
 
             # Adding an affixes
             for affix in item['keystone_affixes']:
@@ -175,12 +183,26 @@ class CharacterUpdater:
 
     @staticmethod
     def update_guild_role(name: str, role: int):
+        """
+        Updates player guild role
+
+        :param name:
+        :param role:
+        :return:
+        """
         db = blizzard_db()
         db.query(CharacterModel).filter(CharacterModel.name == name).update({'guild_role': role})
         db.commit()
 
     @staticmethod
     def update_meta(name: str, meta: str):
+        """
+        Updates player meta
+
+        :param name:
+        :param meta:
+        :return:
+        """
         db = blizzard_db()
         db.query(CharacterModel).filter(CharacterModel.name == name).update({'meta_text': meta})
         db.commit()

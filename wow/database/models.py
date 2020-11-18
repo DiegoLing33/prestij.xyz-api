@@ -116,6 +116,8 @@ class MythicRaceMembersModel(Base, CoreModel):
     wow_id = Column(Integer)
     name = Column(String)
 
+    from_guild = Column(Boolean)
+
     spec_id = Column(Integer, ForeignKey('characters_specs.wow_id'))
     spec = relationship('CharacterSpecModel')
 
@@ -131,6 +133,7 @@ class MythicRaceModel(Base, CoreModel):
 
     wow_dung_id = Column(Integer)
     name = Column(String)
+    guild_race = Column(Integer)
 
     completed = Column(Integer)
     duration = Column(Integer)

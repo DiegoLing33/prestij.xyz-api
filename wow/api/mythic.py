@@ -34,3 +34,7 @@ class MythicAPI:
     @staticmethod
     def list(db: Session, limit: int = 100, offset: int = 0):
         return DatabaseUtils.limited_results(db, MythicRaceModel, limit=limit, offset=offset)
+
+    @staticmethod
+    def by_hash(db: Session, mythic_hash: str):
+        return db.query(MythicRaceModel).filter(MythicRaceModel.mythic_hash == mythic_hash).first()

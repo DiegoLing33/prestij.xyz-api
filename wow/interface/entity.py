@@ -150,6 +150,8 @@ class MythicRaceMember(BaseModel):
     wow_id: int
     name: str
 
+    from_guild: bool
+
     spec_id: int
     spec: Optional[CharacterActiveSpec]
 
@@ -177,6 +179,7 @@ class MythicRace(BaseModel):
 
     wow_dung_id: int
     name: str
+    guild_race: int
 
     completed: int
     duration: int
