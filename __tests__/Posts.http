@@ -1,0 +1,39 @@
+### Gets the categories
+GET http://localhost:8000/posts/categories/
+Accept: application/json
+
+### Adds the category
+POST http://localhost:8000/posts/categories/
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "title": "Аддоны",
+  "url": "addons"
+}
+
+
+### Adds the post
+POST http://localhost:8000/posts/
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "category_id": 2,
+  "title": "Мой первый аддон",
+  "content": "Lololo lolo l olo",
+  "tags": ""
+}
+
+### Gets the post
+GET http://localhost:8000/posts/1
+Accept: application/json
+
+
+### Gets the posts by category
+GET http://localhost:8000/posts/category/2
+Accept: application/json
+
+### Like the post
+GET http://localhost:8000/posts/1/like
+Accept: application/json

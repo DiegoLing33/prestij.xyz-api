@@ -197,3 +197,69 @@ class MythicRace(BaseModel):
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True
+
+
+class Post(BaseModel):
+    pass
+
+
+class BTUser(BaseModel):
+    bt_id: int
+    bt_title: str
+    name: str
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True
+
+
+class PostComment(BaseModel):
+    user_id: int
+    post_id: int
+    reply_id: int
+    text: str
+
+    post: Optional[Post]
+    user: Optional[BTUser]
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True
+
+
+class PostCategory(BaseModel):
+    user_id: int
+    title: str
+    url: str
+
+    user: Optional[BTUser]
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True
+
+
+class PostLike(BaseModel):
+    post_id: int
+    user_id: int
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True
+
+
+class Post(BaseModel):
+    title: str
+    user_id: int
+    category_id: int
+
+    content: str
+    tags: str
+
+    category: Optional[PostCategory]
+    likes: Optional[List[PostLike]]
+    comments: Optional[List[PostComment]]
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True

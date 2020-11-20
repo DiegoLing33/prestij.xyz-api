@@ -9,31 +9,33 @@
 #  @site http://ling.black
 from typing import List
 
-from pydantic import BaseModel
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends
 
-from core.response import RequestLimit
-from database import DatabaseUtils
-from wow.database.models import MythicRaceModel
-from wow.interface.entity import MythicRace
+from database import get_db, DatabaseUtils
+from wow.database.models import PostCategoryModel, BTUserModel
+from wow.interface.entity import PostCategory, BTUser
 
-
-class MythicAPIList(BaseModel):
-    items: List[MythicRace]
-    count: int
+router = APIRouter()
 
 
-class MythicAPIListResponse(BaseModel):
-    response: MythicAPIList
-    request: RequestLimit
+@router.post(
+    "/",
+    response_model=BTUser,
+    summary="Adds the user"
+)
+def add_user(body: BTUser, db=Depends(get_db)):
+    return DatabaseUtils.insert(db, BTUserModel(
+        bt_id=body.bt_id,
+        bt_title=body.bt_title,
+        name=body.name,
+    ))
 
 
-class MythicAPI:
+@router.get(
+    "/{bt_id}",
+    response_model=BTUser,
+    summary="Returns the user"
+)
+def get_user(bt_id: int, db=Depends(get_db)):
+    return db.query(BTUserModel).filter(BTUserModel.bt_id == bt_id).first()
 
-    @staticmethod
-    def list(db: Session, limit: int = 100, offset: int = 0):
-        return DatabaseUtils.limited_results(db, MythicRaceModel, limit=limit, offset=offset)
-
-    @staticmethod
-    def by_hash(db: Session, mythic_hash: str):
-        return db.query(MythicRaceModel).filter(MythicRaceModel.mythic_hash == mythic_hash).first()

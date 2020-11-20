@@ -147,3 +147,58 @@ class MythicRaceModel(Base, CoreModel):
 
     members = relationship("MythicRaceMembersModel", back_populates="mythic")
     affixes = relationship("MythicRaceAffixesModel", back_populates="mythic")
+
+
+class BTUserModel(Base, CoreModel):
+    __tablename__ = "bt_users"
+
+    bt_id = Column(Integer)
+    bt_title = Column(String)
+    name = Column(String)
+
+
+class PostCommentsModel(Base, CoreModel):
+    __tablename__ = "posts_comments"
+
+    user_id = Column(Integer, ForeignKey("bt_users.bt_id"))
+    post_id = Column(Integer, ForeignKey("posts.id"))
+    reply_id = Column(Integer)
+    text = Column(String)
+
+    post = relationship("PostModel", back_populates="comments")
+    user = relationship("BTUserModel")
+
+
+class PostCategoryModel(Base, CoreModel):
+    __tablename__ = "posts_categories"
+
+    user_id = Column(Integer, ForeignKey("bt_users.bt_id"))
+    title = Column(String)
+    url = Column(String, default='')
+
+    user = relationship("BTUserModel")
+
+
+class PostLikeModel(Base, CoreModel):
+    __tablename__ = "posts_likes"
+
+    post_id = Column(Integer,  ForeignKey("posts.id"))
+    user_id = Column(Integer, ForeignKey("bt_users.bt_id"))
+
+    user = relationship("BTUserModel")
+    post = relationship("PostModel", back_populates="likes")
+
+
+class PostModel(Base, CoreModel):
+    __tablename__ = "posts"
+
+    title = Column(String)
+    user_id = Column(Integer, ForeignKey("bt_users.bt_id"))
+    category_id = Column(Integer, ForeignKey("posts_categories.id"))
+
+    content = Column(String)
+    tags = Column(String, default='')
+
+    category = relationship("PostCategoryModel")
+    likes = relationship("PostLikeModel", back_populates="post")
+    comments = relationship("PostCommentsModel", back_populates="post")

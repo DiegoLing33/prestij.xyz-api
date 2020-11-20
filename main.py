@@ -14,7 +14,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
 from config import app_server, app_port
-from wow.router import character, guild, mythic
+from wow.router import character, guild, mythic, posts, btusers
 from database.database import engine, Base
 from middleware import use_content_type
 from routers import users, groups, auth, users_meta, data
@@ -56,31 +56,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Adding routes
-app.include_router(
-    users.router,
-    prefix="/users",
-    tags=["users"]
-)
-
-app.include_router(
-    users_meta.router,
-    prefix="/users",
-    tags=["users"]
-)
-
-app.include_router(
-    groups.router,
-    prefix="/groups",
-    tags=["groups"]
-)
-
-app.include_router(
-    auth.router,
-    prefix="/auth",
-    tags=["auth"]
-)
-
 app.include_router(
     data.router,
     prefix="/data",
@@ -101,6 +76,16 @@ app.include_router(
 app.include_router(
     mythic.router,
     prefix="/mythic",
+    tags=['wow']
+)
+app.include_router(
+    posts.router,
+    prefix="/posts",
+    tags=['wow']
+)
+app.include_router(
+    btusers.router,
+    prefix="/users",
     tags=['wow']
 )
 
