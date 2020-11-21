@@ -153,3 +153,12 @@ For example it uses `http://server.prestij.xyz` domain
       "token": "blizzard_auth_token",
       "text": "comment_text"
     } 
+    
+  - Removes the comment
+    ```http request
+    DELETE /posts/comment
+    
+    {
+      "comment_id: the_comment_id,
+      "token": "blizzard_auth_token"
+    } 
