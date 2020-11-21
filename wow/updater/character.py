@@ -24,6 +24,8 @@ class CharacterUpdater:
     @staticmethod
     def update_character_info(name: str, role=0):
         data = BlizzardAPI.character(name)
+        if data is None:
+            return
         db = blizzard_db()
         db.query(CharacterModel).filter(CharacterModel.wow_id == data.wow_id).delete()
 

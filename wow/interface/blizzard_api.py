@@ -7,7 +7,7 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
-from typing import List
+from typing import List, Optional
 
 from blizzard.character import blizzard_character, blizzard_character_equipment
 from blizzard.data import blizzard_data_classes, blizzard_data_races, blizzard_data_specs
@@ -24,13 +24,15 @@ class BlizzardAPI:
         return resp
 
     @staticmethod
-    def character(name: str) -> Character:
+    def character(name: str) -> Optional[Character]:
         """
         Returns the character
         :param name:
         :return:
         """
         resp = blizzard_character(name)
+        if 'id' not in resp:
+            return None
         obj = Character(
             wow_id=resp['id'],
             name=resp['name'],

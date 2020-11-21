@@ -141,7 +141,7 @@ class Character(BaseModel):
     realm_id: int
     guild_id: int
 
-    activity: int
+    activity: Optional[int]
 
     equipment: Optional[List[CharacterEquipment]]
 
