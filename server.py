@@ -14,7 +14,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
 from config import app_server, app_port
-from router import character, guild, mythic, btusers
+from router import character, guild, mythic, btusers, files
 from router import posts
 from database.database import engine, Base
 from middleware import use_content_type
@@ -80,6 +80,11 @@ app.include_router(
 app.include_router(
     btusers.router,
     prefix="/users",
+    tags=['wow']
+)
+app.include_router(
+    files.router,
+    prefix="/files",
     tags=['wow']
 )
 

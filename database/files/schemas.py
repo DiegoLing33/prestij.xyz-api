@@ -7,10 +7,22 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
+from datetime import datetime
 
-from .character import router
-from .guild import router
-from .mythic import router
-from .posts import router
-from .btusers import router
-from .files import router
+from pydantic import BaseModel
+
+from wow.interface.entity import BlizzardUser
+
+
+class FileSchema(BaseModel):
+    id: int
+    user: BlizzardUser
+
+    real_name: str
+    file_name: str
+    directory_name: str
+    created: datetime
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True

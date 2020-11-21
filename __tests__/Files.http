@@ -1,0 +1,18 @@
+###
+POST {{host}}/files/upload?token={{token_raw}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+
+--WebAppBoundary--
+Content-Disposition: form-data; name="files"; filename="file.txt"
+
+< ./a.txt
+--WebAppBoundary--
+Content-Disposition: form-data; name="files"; filename="file2.txt"
+
+< ./a.txt
+--WebAppBoundary--
+
+### Returns files list
+GET {{host}}/files/?token={{token_raw}}
+Accept: application/json
