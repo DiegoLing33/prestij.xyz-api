@@ -7,6 +7,7 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
+from datetime import datetime
 from typing import Optional, List
 
 from pydantic import BaseModel
@@ -203,44 +204,99 @@ class Post(BaseModel):
     pass
 
 
-class BTUser(BaseModel):
-    bt_id: int
-    bt_title: str
-    name: str
+# ------------------------------------
+#            BLIZZARD USER
+# ------------------------------------
+
+class BlizzardUserBase(BaseModel):
+    blizzard_name: str
+
+
+class BlizzardUserCreate(BlizzardUserBase):
+    token: str
+
+
+class BlizzardUser(BlizzardUserBase):
+    id: int
+    blizzard_id: int
+    created: datetime
 
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True
 
 
-class PostComment(BaseModel):
-    user_id: int
+# ------------------------------------
+#            POST COMMENT
+# ------------------------------------
+
+class PostCommentBase(BaseModel):
     post_id: int
     reply_id: int
     text: str
 
-    post: Optional[Post]
-    user: Optional[BTUser]
+
+class PostCommentCreate(PostCommentBase):
+    token: str
+
+
+class PostComment(PostCommentBase):
+    id: int
+
+    user_id: int
+
+    created: datetime
+
+    post: Post
+    user: BlizzardUser
 
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True
 
 
-class PostCategory(BaseModel):
-    user_id: int
+# ------------------------------------
+#            POST CATEGORY
+# ------------------------------------
+
+class PostCategoryBase(BaseModel):
     title: str
     url: str
 
-    user: Optional[BTUser]
+
+class PostCategoryCreate(PostCategoryBase):
+    token: str
+
+
+class PostCategory(PostCategoryBase):
+    id: int
+
+    user_id: int
+    created: datetime
+
+    user: BlizzardUser
 
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True
 
 
-class PostLike(BaseModel):
+# ------------------------------------
+#            POST LIKES
+# ------------------------------------
+
+
+class PostLikeBase(BaseModel):
     post_id: int
+
+
+class PostLikeCreate(PostLikeBase):
+    token: str
+
+
+class PostLike(PostLikeBase):
+    id: int
+
     user_id: int
 
     class Config:
@@ -248,17 +304,32 @@ class PostLike(BaseModel):
         arbitrary_types_allowed = True
 
 
-class Post(BaseModel):
-    title: str
-    user_id: int
-    category_id: int
+# ------------------------------------
+#            POST
+# ------------------------------------
 
+class PostBase(BaseModel):
+    title: str
+    category_id: int
     content: str
     tags: str
+    image: str
 
-    category: Optional[PostCategory]
-    likes: Optional[List[PostLike]]
-    comments: Optional[List[PostComment]]
+
+class PostCreate(PostBase):
+    token: str
+
+
+class Post(PostBase):
+    id: Optional[int]
+
+    user_id: int
+    created: datetime
+
+    category: PostCategory
+    likes: List[PostLike]
+    comments: List[PostComment]
+    user: BlizzardUser
 
     class Config:
         orm_mode = True
