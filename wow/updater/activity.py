@@ -10,8 +10,8 @@
 import datetime
 from math import floor
 
-from wow.blizzard.core import blizzard_db
-from wow.database.models import CharacterModel, MythicRaceMembersModel, MythicRaceModel
+from blizzard.core import blizzard_db
+from database.wow.models import CharacterModel, MythicRaceMembersModel, MythicRaceModel
 
 
 class PlayersActivityUpdater:

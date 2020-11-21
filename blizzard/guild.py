@@ -7,19 +7,31 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
+from urllib.parse import quote
 
-import setuptools
+from blizzard.core import default_params, blizzard_request
+from config import guild_name, server_slug
 
-setuptools.setup(
-    name="ling-simple-api",
-    version="0.0.1",
-    author="Yakov V. Ling",
-    author_email="diegoling33@yandex.ru",
-    packages=setuptools.find_packages(),
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],
-    python_requires='>=3.8',
-)
+
+def blizzard_guild_roster(guild: str = guild_name, data=default_params, sleep: int = 10):
+    """
+    Returns the guild roster
+    :param guild:
+    :param data:
+    :param sleep:
+    :return:
+    """
+    name = quote(guild.lower())
+    return blizzard_request(f"data/wow/guild/{server_slug}/{name}/roster", data, sleep)
+
+
+def blizzard_guild_info(guild: str = guild_name, data=default_params, sleep: int = 10):
+    """
+    Returns the guild info
+    :param guild:
+    :param data:
+    :param sleep:
+    :return:
+    """
+    name = quote(guild.lower())
+    return blizzard_request(f"data/wow/guild/{server_slug}/{name}", data, sleep)

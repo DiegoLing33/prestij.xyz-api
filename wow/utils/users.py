@@ -9,9 +9,9 @@
 #  @site http://ling.black
 from fastapi import HTTPException
 
+from blizzard.core import blizzard_db, blizzard_oauth_validate
 from database import DatabaseUtils
-from wow.blizzard.core import blizzard_oauth_validate, blizzard_db
-from wow.database.models import BlizzardUserModel
+from database.wow.models import BlizzardUserModel
 
 
 class BlizzardUsersUtils:

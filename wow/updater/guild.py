@@ -9,9 +9,9 @@
 #  @site http://ling.black
 from logzero import logger
 
+from blizzard.core import blizzard_db
+from blizzard.guild import blizzard_guild_info
 from database.client import DataStore
-from wow.blizzard import blizzard_guild_info
-from wow.blizzard.core import blizzard_db
 
 
 class GuildUpdater:

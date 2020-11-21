@@ -7,11 +7,11 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
-import json
 from typing import List
 
-from wow.blizzard import blizzard_guild_info, blizzard_character, blizzard_data_classes, blizzard_data_races, \
-    blizzard_data_specs, blizzard_character_equipment
+from blizzard.character import blizzard_character, blizzard_character_equipment
+from blizzard.data import blizzard_data_classes, blizzard_data_races, blizzard_data_specs
+from blizzard.guild import blizzard_guild_info
 from wow.interface.entity import Character, CharacterClass, CharacterRace, CharacterActiveSpec, CharacterEquipment
 from wow.utils.character import get_role_by_spec_id
 

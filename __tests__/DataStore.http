@@ -1,8 +1,8 @@
 ### Gets all the values
-GET http://localhost:8000/data/list
+GET {{host}}/data/list
 
 ### Sets the value 1
-PUT http://localhost:8000/data/name
+PUT {{host}}/data/name
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ### Sets the value 2
-PUT http://localhost:8000/data/description
+PUT {{host}}/data/description
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ### Gets the value
-GET http://localhost:8000/data/name
+GET {{host}}/data/name
 
 ### Removes the value
-DELETE http://localhost:8000/data/name
+DELETE {{host}}/data/name

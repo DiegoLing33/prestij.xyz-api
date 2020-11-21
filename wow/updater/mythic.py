@@ -10,9 +10,8 @@
 from logzero import logger
 from progress.bar import Bar
 
-from wow.blizzard.core import blizzard_db
-from wow.database.models import MythicRaceMembersModel, CharacterModel, MythicRaceModel, MythicRaceAffixesModel
-from wow.updater import CharacterUpdater
+from blizzard.core import blizzard_db
+from database.wow.models import MythicRaceMembersModel, CharacterModel, MythicRaceModel, MythicRaceAffixesModel
 from wow.utils.mythic_utils import MythicUtils
 
 

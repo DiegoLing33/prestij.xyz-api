@@ -7,7 +7,6 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
-import math
 from typing import List
 
 from fastapi import APIRouter, Depends
@@ -15,7 +14,7 @@ from fastapi import APIRouter, Depends
 from database import get_db
 from database.client import DataStore
 from database.schemas import DataStore as DataStoreType
-from wow.database.models import CharacterModel
+from database.wow.models import CharacterModel
 
 router = APIRouter()
 

@@ -14,26 +14,22 @@ from sqlalchemy.orm import Session
 
 from core.response import RequestLimit
 from database import DatabaseUtils
-from wow.database.models import MythicRaceModel
-from wow.interface.entity import MythicRace
+from database.wow.models import CharacterModel
+from wow.interface.entity import Character
 
 
-class MythicAPIList(BaseModel):
-    items: List[MythicRace]
+class CharacterAPIList(BaseModel):
+    items: List[Character]
     count: int
 
 
-class MythicAPIListResponse(BaseModel):
-    response: MythicAPIList
+class CharacterAPIListResponse(BaseModel):
+    response: CharacterAPIList
     request: RequestLimit
 
 
-class MythicAPI:
+class CharacterAPI:
 
     @staticmethod
     def list(db: Session, limit: int = 100, offset: int = 0):
-        return DatabaseUtils.limited_results(db, MythicRaceModel, limit=limit, offset=offset)
-
-    @staticmethod
-    def by_hash(db: Session, mythic_hash: str):
-        return db.query(MythicRaceModel).filter(MythicRaceModel.mythic_hash == mythic_hash).first()
+        return DatabaseUtils.limited_results(db, CharacterModel, limit=limit, offset=offset)

@@ -12,8 +12,8 @@
 from logzero import logger
 from progress.bar import Bar
 
-from wow.blizzard.core import blizzard_db
-from wow.database.models import CharacterRaceModel, CharacterClassModel, CharacterSpecModel
+from blizzard.core import blizzard_db
+from database.wow.models import CharacterRaceModel, CharacterClassModel, CharacterSpecModel
 from wow.interface.blizzard_api import BlizzardAPI
 
 

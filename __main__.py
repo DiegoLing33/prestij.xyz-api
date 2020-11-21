@@ -7,12 +7,24 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
+
+#  ██╗░░░░░██╗███╗░░██╗░██████╗░░░░██████╗░██╗░░░░░░█████╗░░█████╗░██╗░░██╗
+#  ██║░░░░░██║████╗░██║██╔════╝░░░░██╔══██╗██║░░░░░██╔══██╗██╔══██╗██║░██╔╝
+#  ██║░░░░░██║██╔██╗██║██║░░██╗░░░░██████╦╝██║░░░░░███████║██║░░╚═╝█████═╝░
+#  ██║░░░░░██║██║╚████║██║░░╚██╗░░░██╔══██╗██║░░░░░██╔══██║██║░░██╗██╔═██╗░
+#  ███████╗██║██║░╚███║╚██████╔╝░░░██████╦╝███████╗██║░░██║╚█████╔╝██║░╚██╗
+#  ╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░░░╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝
+#
+#  Developed by Yakov V. Panov (C) Ling • Black 2020
+#  @site http://ling.black
 import os
 import time
 
 import pyfiglet
 import enquiries
+import uvicorn
 
+from config import app_server, app_port
 from database import engine, Base
 from wow.updater.activity import PlayersActivityUpdater
 from wow.updater.mythic import MythicUpdater
@@ -148,6 +160,7 @@ def menu_root():
         'I want to do standard cron operations',
         'I see it first time (install)',
         'I want to single update',
+        'I want to run web server',
         'I want to quit'
     ]
     choice = enquiries.choose('What r u wanna do?: ', options)
@@ -159,6 +172,8 @@ def menu_root():
     if choice is options[4]:
         menu_single()
     if choice is options[5]:
+        uvicorn.run("server:app", host=app_server, port=app_port, reload=True)
+    if choice is options[6]:
         quit()
 
 

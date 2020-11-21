@@ -14,7 +14,7 @@ from pydantic import BaseModel
 
 from core.response import RequestLimit
 from database import get_db
-from wow.database.models import PostModel, PostCommentsModel
+from database.wow.models import PostModel, PostCommentsModel
 from wow.interface.entity import PostCategory, Post, PostCategoryCreate, PostCreate, PostLikeCreate, PostCommentCreate
 from wow.utils.posts import PostsUtils
 from wow.utils.users import BlizzardUsersUtils

@@ -19,12 +19,12 @@ logs/
 middleware/__pycache__/
 routers/__pycache__/
 wow/__pycache__/
-wow/api/__pycache__/
-wow/blizzard/__pycache__/
+api/__pycache__/
+blizzard/__pycache__/
 wow/database/__pycache__/
 wow/downloaders/__pycache__/
 wow/interface/__pycache__/
-wow/router/__pycache__/
+router/__pycache__/
 wow/updater/__pycache__/
 wow/utils/__pycache__/
 yarn-error.log

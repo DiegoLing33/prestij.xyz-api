@@ -9,102 +9,94 @@
 #  @site http://ling.black
 from urllib.parse import quote
 
-from wow.blizzard.core import default_params, blizzard_request
-from config import default_static_namespace
+from blizzard.core import default_params, blizzard_request
+from config import server_slug, mythic_season
 
 
-def blizzard_data_class(
+def blizzard_character(
         name: str,
+        server: str = server_slug,
         data=default_params,
-        sleep: int = 10,
+        sleep: int = 10
 ):
     """
-    Returns the game class info
+    Returns the blizzard character information
     :param name:
+    :param server:
     :param data:
     :param sleep:
     :return:
     """
-    r_name = quote(name.lower())
+    name = quote(name.lower())
     return blizzard_request(
-        f"data/wow/playable-class/{r_name}",
-        data,
-        sleep,
-    )
-
-
-def blizzard_data_race(
-        name: str,
-        data=default_params,
-        sleep: int = 10,
-):
-    """
-    Returns the game race info
-    :param name:
-    :param data:
-    :param sleep:
-    :return:
-    """
-    r_name = quote(name.lower())
-    return blizzard_request(
-        f"data/wow/playable-race/{r_name}",
-        data,
-        sleep,
-    )
-
-
-def blizzard_data_classes(
-        sleep=10,
-        static_namespace=default_static_namespace
-):
-    """
-    Returns the classes
-    :param sleep:
-    :param static_namespace:
-    :return:
-    """
-    data = default_params
-    data["namespace"] = static_namespace
-    return blizzard_request(
-        "data/wow/playable-class/index",
+        f"profile/wow/character/{server}/{name}",
         data,
         sleep
     )
 
 
-def blizzard_data_races(
-        sleep=10,
-        static_namespace=default_static_namespace
+def blizzard_character_equipment(
+        name: str,
+        server: str = server_slug,
+        data=default_params,
+        sleep: int = 10
 ):
     """
-    Returns the races
+    Returns the character equipment information
+    :param name:
+    :param server:
+    :param data:
     :param sleep:
-    :param static_namespace:
     :return:
     """
-    data = default_params
-    data["namespace"] = static_namespace
+    name = quote(name.lower())
     return blizzard_request(
-        "data/wow/playable-race/index",
+        f"profile/wow/character/{server}/{name}/equipment",
         data,
         sleep
     )
 
 
-def blizzard_data_specs(
-        sleep=10,
-        static_namespace=default_static_namespace
+def blizzard_character_media(
+        name: str,
+        server: str = server_slug,
+        data=default_params,
+        sleep: int = 10
 ):
     """
-    Returns the specs
+    Returns the character media data
+    :param name:
+    :param server:
+    :param data:
     :param sleep:
-    :param static_namespace:
     :return:
     """
-    data = default_params
-    data["namespace"] = static_namespace
+    name = quote(name.lower())
     return blizzard_request(
-        "data/wow/playable-specialization/index",
+        f"profile/wow/character/{server}/{name}/character-media",
+        data,
+        sleep
+    )
+
+
+def blizzard_character_mythic_season(
+        name: str,
+        server: str = server_slug,
+        season: int = mythic_season,
+        data=default_params,
+        sleep: int = 10
+):
+    """
+    Returns character mythic season data
+    :param name:
+    :param server:
+    :param season:
+    :param data:
+    :param sleep:
+    :return:
+    """
+    return blizzard_request(
+        f"profile/wow/character/{server}/{name}/mythic-keystone-profile/season/{season}",
         data,
         sleep
     )

@@ -13,9 +13,9 @@ from logzero import logger
 
 from progress.bar import Bar
 
+from blizzard.character import blizzard_character_media
+from blizzard.core import blizzard_media
 from core.url import LSAURL
-from wow.blizzard import blizzard_character_media
-from wow.blizzard.core import blizzard_media
 from config import default_items_images_path, default_characters_images_path
 
 

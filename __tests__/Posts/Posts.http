@@ -1,17 +1,17 @@
 ### Gets the posts
-GET http://localhost:8000/posts
+GET {{host}}/posts
 Accept: application/json
 
 ### Gets the posts by category
-GET http://localhost:8000/posts/category/2
+GET {{host}}/posts/category/2
 Accept: application/json
 
 ### Adds the post
-POST http://localhost:8000/posts/
+POST {{host}}/posts/
 Content-Type: application/json
 
 {
-  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "token": {{token}},
   "title": "Мой первый пост",
   "image": "http://prestij.xyz/img.png",
   "content": "Текст новости в краткой его форме. Возможно первый абзац или что-то типо того.",
@@ -20,38 +20,38 @@ Content-Type: application/json
 }
 
 ### Likes the post
-POST http://localhost:8000/posts/like
+POST {{host}}/posts/like
 Content-Type: application/json
 
 {
-  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "token": {{token}},
   "post_id": 1
 }
 
 ### Unlikes the post
-POST http://localhost:8000/posts/unlike
+POST {{host}}/posts/unlike
 Content-Type: application/json
 
 {
-  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "token": {{token}},
   "post_id": 1
 }
 
 ### Comments the post
-POST http://localhost:8000/posts/comment
+POST {{host}}/posts/comment
 Content-Type: application/json
 
 {
-  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "token": {{token}},
   "post_id": 1,
   "text": "Oh, i really like it!"
 }
 
 ### Removes the comment
-DELETE http://localhost:8000/posts/comment
+DELETE {{host}}/posts/comment
 Content-Type: application/json
 
 {
-  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "token": {{token}},
   "comment_id": 1
 }

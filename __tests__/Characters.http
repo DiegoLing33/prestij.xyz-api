@@ -1,5 +1,5 @@
 ### Sending meta text changes
-PUT http://localhost:8000/characters/meta/Дайкирия
+PUT {{host}}/characters/meta/Дайкирия
 Content-Type: application/json
 
 {
@@ -8,9 +8,9 @@ Content-Type: application/json
 
 
 ### Getting character
-GET http://localhost:8000/characters/дайкирия
+GET {{host}}/characters/дайкирия
 Accept: application/json
 
 ### Guild activity
-GET http://localhost:8000/guild/activity
+GET {{host}}/guild/activity
 Accept: application/json

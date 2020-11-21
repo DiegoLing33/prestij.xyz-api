@@ -9,9 +9,9 @@
 #  @site http://ling.black
 from typing import Optional
 
+from blizzard.core import blizzard_db
 from database import DatabaseUtils
-from wow.blizzard.core import blizzard_db
-from wow.database.models import PostCategoryModel, PostModel, PostCommentsModel, PostLikeModel
+from database.wow.models import PostCategoryModel, PostModel, PostCommentsModel, PostLikeModel
 
 
 class PostsUtils:

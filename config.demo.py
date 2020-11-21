@@ -41,6 +41,7 @@ blizzard_api_url = "https://eu.api.blizzard.com"
 default_static_path = 'static'
 default_items_images_path = default_static_path + "/items"
 default_characters_images_path = default_static_path + "/characters"
+default_files_path = default_static_path + "/files"
 
 # Application
 app_server = '127.0.0.1'

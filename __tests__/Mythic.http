@@ -1,5 +1,5 @@
 ### Gets all the values
-GET http://localhost:8000/mythic/list
+GET {{host}}/mythic
 
 ### Gets the race by mythic hash
-GET http://localhost:8000/mythic/42c68c33ba13e64778bc8ae2474b5c9d
+GET {{host}}/mythic/42c68c33ba13e64778bc8ae2474b5c9d

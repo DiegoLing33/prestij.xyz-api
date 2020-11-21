@@ -14,10 +14,10 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
 from config import app_server, app_port
-from wow.router import character, guild, mythic, posts, btusers
+from router import character, guild, mythic, btusers
+from router import posts
 from database.database import engine, Base
 from middleware import use_content_type
-from routers import users, groups, auth, users_meta, data
 
 Base.metadata.create_all(bind=engine)
 
@@ -54,12 +54,6 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-)
-
-app.include_router(
-    data.router,
-    prefix="/data",
-    tags=["data"]
 )
 
 app.include_router(

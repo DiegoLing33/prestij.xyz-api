@@ -10,8 +10,7 @@
 import math
 from hashlib import md5
 
-from wow.blizzard.mythic import blizzard_character_mythic_keystone_profile, \
-    blizzard_character_mythic_keystone_profile_season
+from blizzard.mythic import blizzard_character_mythic_keystone_profile_season
 from wow.utils.character import roles, CharactersSorter
 
 

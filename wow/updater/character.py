@@ -12,9 +12,9 @@ import time
 from logzero import logger
 from progress.bar import Bar
 
-from wow.blizzard import blizzard_guild_roster
-from wow.blizzard.core import blizzard_db
-from wow.database.models import CharacterModel, CharacterEquipmentModel
+from blizzard.core import blizzard_db
+from blizzard.guild import blizzard_guild_roster
+from database.wow.models import CharacterModel, CharacterEquipmentModel
 from wow.interface.blizzard_api import BlizzardAPI
 from wow.interface.entity import CharacterCountableSlots
 

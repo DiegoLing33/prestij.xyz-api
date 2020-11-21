@@ -11,7 +11,7 @@
 import os
 from logzero import logger
 
-from config import default_static_path, default_items_images_path, default_characters_images_path
+from config import default_static_path, default_items_images_path, default_characters_images_path, default_files_path
 
 
 def wow_install():
@@ -29,4 +29,7 @@ def wow_install():
     if not os.path.isdir(default_characters_images_path):
         logger.info(f'Creating {default_characters_images_path} path')
         os.mkdir(default_characters_images_path)
+    if not os.path.isdir(default_files_path):
+        logger.info(f'Creating {default_files_path} path')
+        os.mkdir(default_files_path)
     logger.info('All directories exists!')
