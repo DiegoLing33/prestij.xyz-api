@@ -79,5 +79,5 @@ class MediaDownloader:
                 LSAURL(image_avatar).download_file(f'{path}/{save_name}_avatar.png')
                 LSAURL(image_main).download_file(f'{path}/{save_name}_main.png')
             except KeyError:
-                logger.error(model.name + 'not found')
+                logger.error(model.name + ' not found')
             bar.next()

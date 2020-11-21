@@ -11,6 +11,7 @@ import datetime
 from math import floor
 
 from blizzard.core import blizzard_db
+from database import DatabaseUtils
 from database.wow.models import CharacterModel, MythicRaceMembersModel, MythicRaceModel
 
 
@@ -50,6 +51,6 @@ class PlayersActivityUpdater:
     @staticmethod
     def update():
         db = blizzard_db()
-        players = db.query(CharacterModel).all()
+        players = DatabaseUtils.core_query(db.query(CharacterModel)).all()
         for player in players:
             PlayersActivityUpdater.update_player(player.name)

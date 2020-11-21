@@ -9,6 +9,7 @@
 #  @site http://ling.black
 from blizzard.core import blizzard_db
 from config import default_items_images_path, default_characters_images_path
+from database import DatabaseUtils
 from database.wow.models import CharacterEquipmentModel, CharacterModel
 from wow.downloaders import MediaDownloader
 
@@ -50,6 +51,6 @@ class MediaUpdater:
         :return:
         """
         MediaDownloader.download_characters_images(
-            blizzard_db().query(CharacterModel).all(),
+            DatabaseUtils.core_query(blizzard_db().query(CharacterModel)).all(),
             path
         )

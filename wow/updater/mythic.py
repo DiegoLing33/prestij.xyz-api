@@ -11,6 +11,7 @@ from logzero import logger
 from progress.bar import Bar
 
 from blizzard.core import blizzard_db
+from database import DatabaseUtils
 from database.wow.models import MythicRaceMembersModel, CharacterModel, MythicRaceModel, MythicRaceAffixesModel
 from wow.utils.mythic_utils import MythicUtils
 
@@ -79,7 +80,7 @@ class MythicUpdater:
 
     @staticmethod
     def update_characters_mythic():
-        data = blizzard_db().query(CharacterModel).all()
+        data = DatabaseUtils.core_query(blizzard_db().query(CharacterModel)).all()
         logger.info("Starting update characters mythic...")
         logger.info(f"Total count: {len(data)}")
         bar = Bar('Characters mythic updating', max=len(data), fill='█')
