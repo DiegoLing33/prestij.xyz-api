@@ -33,22 +33,23 @@ class BlizzardAPI:
         :return:
         """
         resp = blizzard_character(name)
-        if 'id' not in resp:
+        try:
+            obj = Character(
+                wow_id=resp['id'],
+                name=resp['name'],
+                level=resp['level'],
+                gender=resp['gender']['type'],
+                faction=resp['faction']['type'],
+                character_race_id=resp['race']['id'],
+                character_class_id=resp['character_class']['id'],
+                character_spec_id=resp['active_spec']['id'],
+                realm_id=resp['realm']['id'],
+                guild_id=resp['guild']['id'],
+            )
+            return obj
+        except KeyError:
             logger.warn(name + ' not found!')
             return None
-        obj = Character(
-            wow_id=resp['id'],
-            name=resp['name'],
-            level=resp['level'],
-            gender=resp['gender']['type'],
-            faction=resp['faction']['type'],
-            character_race_id=resp['race']['id'],
-            character_class_id=resp['character_class']['id'],
-            character_spec_id=resp['active_spec']['id'],
-            realm_id=resp['realm']['id'],
-            guild_id=resp['guild']['id'],
-        )
-        return obj
 
     @staticmethod
     def classes() -> List[CharacterClass]:
