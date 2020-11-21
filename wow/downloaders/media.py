@@ -71,10 +71,13 @@ class MediaDownloader:
         bar = Bar('Characters downloading', max=len(characters), fill='█')
 
         for model in characters:
-            resp = blizzard_character_media(model.name)
-            image_avatar = resp['assets'][1]['value']
-            image_main = resp['assets'][3]['value']
-            save_name = str(model.name).lower()
-            LSAURL(image_avatar).download_file(f'{path}/{save_name}_avatar.png')
-            LSAURL(image_main).download_file(f'{path}/{save_name}_main.png')
+            try:
+                resp = blizzard_character_media(model.name)
+                image_avatar = resp['assets'][1]['value']
+                image_main = resp['assets'][3]['value']
+                save_name = str(model.name).lower()
+                LSAURL(image_avatar).download_file(f'{path}/{save_name}_avatar.png')
+                LSAURL(image_main).download_file(f'{path}/{save_name}_main.png')
+            except KeyError:
+                logger.error(model.name + 'not found')
             bar.next()
