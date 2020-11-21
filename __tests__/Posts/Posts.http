@@ -1,0 +1,57 @@
+### Gets the posts
+GET http://localhost:8000/posts
+Accept: application/json
+
+### Gets the posts by category
+GET http://localhost:8000/posts/category/2
+Accept: application/json
+
+### Adds the post
+POST http://localhost:8000/posts/
+Content-Type: application/json
+
+{
+  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "title": "Мой первый пост",
+  "image": "http://prestij.xyz/img.png",
+  "content": "Текст новости в краткой его форме. Возможно первый абзац или что-то типо того.",
+  "category_id": 1,
+  "tags": ""
+}
+
+### Likes the post
+POST http://localhost:8000/posts/like
+Content-Type: application/json
+
+{
+  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "post_id": 1
+}
+
+### Unlikes the post
+POST http://localhost:8000/posts/unlike
+Content-Type: application/json
+
+{
+  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "post_id": 1
+}
+
+### Comments the post
+POST http://localhost:8000/posts/comment
+Content-Type: application/json
+
+{
+  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "post_id": 1,
+  "text": "Oh, i really like it!"
+}
+
+### Removes the comment
+DELETE http://localhost:8000/posts/comment
+Content-Type: application/json
+
+{
+  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "comment_id": 1
+}

@@ -1,0 +1,23 @@
+### Gets all the categories
+GET http://localhost:8000/posts/categories
+Accept: application/json
+
+### Adds the category
+POST http://localhost:8000/posts/categories
+Content-Type: application/json
+
+{
+  "title": "Новости",
+  "url": "News",
+  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0"
+}
+
+### Adds the category
+POST http://localhost:8000/posts/categories
+Content-Type: application/json
+
+{
+  "title": "Аддоны",
+  "url": "addons",
+  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0"
+}

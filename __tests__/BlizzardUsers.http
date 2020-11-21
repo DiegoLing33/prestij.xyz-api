@@ -1,0 +1,8 @@
+### Adds the user
+POST http://localhost:8000/users/
+Content-Type: application/json
+
+{
+  "token": "EUZUCiBTDZcf8Hx5hG2PNqoYMwsxrZwTA0",
+  "blizzard_name": "Daikiri#21290"
+}

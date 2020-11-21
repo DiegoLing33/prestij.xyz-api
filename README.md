@@ -9,6 +9,7 @@ Application has it own crony entry point. Just use `python -m cron` and pass arg
 - `info` (or `guild`) - updates only guild info (counters, names, etc.)
 - `characters` (or `guild`) - updates only characters with equipment
 - `mythic` (or `guild`) - updates only mythic data
+- `activity` (or `guild`) - updates only activity data
 - `avatars` (or `media`) - downloads all guild players avatars
 - `items` (or `media`) - downloads all guild players items images
 ---
@@ -70,3 +71,85 @@ For example it uses `http://server.prestij.xyz` domain
    ```
    *(image_id provides in /characters/list method)*
  
+ ### Posts
+ #### Categories
+ 
+ - Get the categories list
+    ```http request
+    GET /posts/categories
+    ```
+    Returns the list of all created categories
+    
+ - Create new category
+    ```http request
+    POST /posts/categories
+    
+    {
+    "title": "Category title",
+    "url": "the_category_url",
+    "token": "blizzard_auth_token"
+    }
+    ```
+ 
+ #### Posts API section
+ 
+  - Get the posts list
+    ```http request
+    GET /posts
+    ```
+    *(Use `offset` and `limit` URL params to manipulate the data)*
+ 
+  - Get the posts list by category id
+    ```http request
+    GET /posts/category/{category_id}
+    ```
+    *(Use `offset` and `limit` URL params to manipulate the data)*
+    
+    
+  - Create new post
+    ```http request
+    POST /posts
+    
+    {
+      "token": "blizzard_auth_token",
+      "title": "Post title",
+      "image": "Post image url",
+      "content": "Post text content",
+      "category_id": category_id_number,
+      "tags": "tag0,tag1,ta2via_comma"
+    }
+    ``` 
+    
+    #### Likes
+    
+  - Likes the post
+    ```http request
+    POST /posts/like
+    
+    {
+      "post_id: the_post_id,
+      "token": "blizzard_auth_token",
+    }
+    ``` 
+    
+  - Unlikes the post
+    ```http request
+    POST /posts/unlike
+    
+    {
+      "post_id: the_post_id,
+      "token": "blizzard_auth_token",
+    }
+    ``` 
+    
+    #### Comments
+    
+  - Adds the comment to the post
+    ```http request
+    POST /posts/comment
+    
+    {
+      "post_id: the_post_id,
+      "token": "blizzard_auth_token",
+      "text": "comment_text"
+    } 

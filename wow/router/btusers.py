@@ -7,35 +7,28 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
-from typing import List
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 
-from database import get_db, DatabaseUtils
-from wow.database.models import PostCategoryModel, BTUserModel
-from wow.interface.entity import PostCategory, BTUser
+from wow.interface.entity import BlizzardUser, BlizzardUserCreate
+from wow.utils.users import BlizzardUsersUtils
 
 router = APIRouter()
 
 
 @router.post(
     "/",
-    response_model=BTUser,
-    summary="Adds the user"
+    response_model=BlizzardUser,
+    summary="Creates the blizzard user"
 )
-def add_user(body: BTUser, db=Depends(get_db)):
-    return DatabaseUtils.insert(db, BTUserModel(
-        bt_id=body.bt_id,
-        bt_title=body.bt_title,
-        name=body.name,
-    ))
-
-
-@router.get(
-    "/{bt_id}",
-    response_model=BTUser,
-    summary="Returns the user"
-)
-def get_user(bt_id: int, db=Depends(get_db)):
-    return db.query(BTUserModel).filter(BTUserModel.bt_id == bt_id).first()
-
+def add_user(body: BlizzardUserCreate):
+    """
+    Adds the user
+    :param body:
+    :return:
+    """
+    blizzard_id = BlizzardUsersUtils.id__safe(body.token)
+    return BlizzardUsersUtils.add(
+        blizzard_id=blizzard_id,
+        blizzard_name=body.blizzard_name
+    )

@@ -16,8 +16,8 @@ class EditTimeModel:
     """
     Model with created and edited columns
     """
-    created = Column(DateTime, default=datetime.utcnow)
-    edited = Column(DateTime, default=datetime.utcnow, onupdate=datetime.now())
+    created = Column(DateTime, default=datetime.now)
+    edited = Column(DateTime, default=datetime.now, onupdate=datetime.now())
 
 
 class CoreModel(EditTimeModel):

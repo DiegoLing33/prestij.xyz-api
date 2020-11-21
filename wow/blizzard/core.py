@@ -114,3 +114,12 @@ def blizzard_media(path: str):
     )
     time.sleep(10 / 1000)
     return r.json()
+
+
+def blizzard_oauth_validate(token: str):
+    api_path = "https://eu.battle.net/oauth/check_token"
+    r = requests.post(
+        api_path,
+        params=dict(token=token)
+    )
+    return r.json()

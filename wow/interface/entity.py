@@ -246,8 +246,6 @@ class PostComment(PostCommentBase):
     user_id: int
 
     created: datetime
-
-    post: Post
     user: BlizzardUser
 
     class Config:
@@ -321,7 +319,7 @@ class PostCreate(PostBase):
 
 
 class Post(PostBase):
-    id: Optional[int]
+    id:int
 
     user_id: int
     created: datetime
