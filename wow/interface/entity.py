@@ -231,8 +231,8 @@ class BlizzardUser(BlizzardUserBase):
 # ------------------------------------
 
 class PostCommentBase(BaseModel):
+    reply_id: Optional[int]
     post_id: int
-    reply_id: int
     text: str
 
 
