@@ -25,7 +25,7 @@ class CharacterUpdater:
     def update_character_info(name: str, role=0):
         data = BlizzardAPI.character(name)
         if data is None:
-            return
+            return None
         db = blizzard_db()
         db.query(CharacterModel).filter(CharacterModel.wow_id == data.wow_id).delete()
 
@@ -47,6 +47,7 @@ class CharacterUpdater:
             guild_id=data.guild_id,
         ))
         db.commit()
+        return True
 
     @staticmethod
     def update_equipment(name: str):
@@ -92,8 +93,9 @@ class CharacterUpdater:
 
     @staticmethod
     def update_character(name: str, role=0):
-        CharacterUpdater.update_character_info(name, role)
-        CharacterUpdater.update_equipment(name)
+        res = CharacterUpdater.update_character_info(name, role)
+        if res is not None:
+            CharacterUpdater.update_equipment(name)
 
     @staticmethod
     def update_characters():

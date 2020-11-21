@@ -9,6 +9,8 @@
 #  @site http://ling.black
 from typing import List, Optional
 
+from logzero import logger
+
 from blizzard.character import blizzard_character, blizzard_character_equipment
 from blizzard.data import blizzard_data_classes, blizzard_data_races, blizzard_data_specs
 from blizzard.guild import blizzard_guild_info
@@ -32,6 +34,7 @@ class BlizzardAPI:
         """
         resp = blizzard_character(name)
         if 'id' not in resp:
+            logger.warn(name + ' not found!')
             return None
         obj = Character(
             wow_id=resp['id'],
