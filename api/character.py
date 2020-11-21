@@ -33,3 +33,8 @@ class CharacterAPI:
     @staticmethod
     def list(db: Session, limit: int = 100, offset: int = 0):
         return DatabaseUtils.limited_results(db, CharacterModel, limit=limit, offset=offset)
+
+    @staticmethod
+    def missed(db: Session, limit: int = 100, offset: int = 0):
+        return DatabaseUtils.limited_results_query(db.query(CharacterModel).filter(CharacterModel.state == 0),
+                                                   limit=limit, offset=offset, show_removed=True)

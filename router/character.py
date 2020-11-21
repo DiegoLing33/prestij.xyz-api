@@ -31,6 +31,15 @@ def get_characters_list(offset: int = 0, limit: int = 100, db=Depends(get_db)):
     return CharacterAPI.list(db, limit, offset)
 
 
+@router.get(
+    "/missed",
+    response_model=CharacterAPIListResponse,
+    summary="Returns all characters in the guild with equipment and extra data that missed the guild"
+)
+def get_characters_list(offset: int = 0, limit: int = 100, db=Depends(get_db)):
+    return CharacterAPI.missed(db, limit, offset)
+
+
 @router.put(
     "/meta/{name}",
     response_model=Character,
