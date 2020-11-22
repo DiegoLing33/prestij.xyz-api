@@ -9,11 +9,11 @@
 #  @site http://ling.black
 from typing import List
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from core.response import RequestLimit
-from database import get_db
+from database import get_db, DatabaseUtils
 from database.wow.models import PostModel, PostCommentsModel
 from wow.interface.entity import PostCategory, Post, PostCategoryCreate, PostCreate, PostLikeCreate, PostCommentCreate
 from wow.utils.posts import PostsUtils
@@ -24,6 +24,11 @@ router = APIRouter()
 
 class TokenArgs(BaseModel):
     token: str
+
+
+class TokenPostIdArgs(BaseModel):
+    token: str
+    post_id: int
 
 
 class CommentIdAndToken(TokenArgs):
@@ -102,7 +107,7 @@ def get_posts_all(category_url: str, limit: int = 100, offset: int = 0):
     :param offset:
     :return:
     """
-    return PostsUtils.get_posts_by_url_limit(
+    return PostsUtils.get_posts_by_category_limit(
         url=category_url,
         limit=limit,
         offset=offset
@@ -184,6 +189,38 @@ def add_post(body: PostCreate):
         tags=body.tags,
         image=body.image
     )
+
+
+@router.delete(
+    "/{post_id}",
+    summary='Deletes the post'
+)
+def delete_post(post_id: int, body: TokenArgs, db=Depends(get_db)):
+    blizzard_id = BlizzardUsersUtils.id__safe(body.token)
+    q = db.query(PostModel).filter(PostModel.id == post_id).filter(PostModel.user_id == blizzard_id)
+    if q.count() == 0:
+        raise HTTPException(status_code=404, detail='Post is undefined')
+    return DatabaseUtils.remove_query(db, q)
+
+
+@router.post(
+    "/{post_id}",
+    summary='Edits the post'
+)
+def edit_post(post_id: int, body: PostCreate, db=Depends(get_db)):
+    blizzard_id = BlizzardUsersUtils.id__safe(body.token)
+    q = db.query(PostModel).filter(PostModel.id == post_id).filter(PostModel.user_id == blizzard_id)
+    if q.count() == 0:
+        raise HTTPException(status_code=404, detail='Post is undefined')
+    q.update({
+        'title': body.title,
+        'content': body.content,
+        'category_id': body.category_id,
+        'image': body.image,
+        'tags': body.tags,
+    })
+    db.commit()
+    return True
 
 
 @router.get(
