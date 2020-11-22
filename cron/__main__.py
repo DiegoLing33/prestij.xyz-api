@@ -28,7 +28,7 @@ def run_cron_operation():
     :return:
     """
 
-    logzero.logfile(f"logs/{datetime.now().strftime('%d.%m.%Y-%H:%M:%S')}-rotating.log", maxBytes=1e6, backupCount=3)
+    logzero.logfile(f"static/logs/{datetime.now().strftime('%d.%m.%Y-%H:%M:%S')}-rotating.log", maxBytes=1e6, backupCount=3)
 
     # Update info first
     if has_arg('info') or has_arg('guild') or has_arg('force__all'):

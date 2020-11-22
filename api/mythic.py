@@ -32,7 +32,7 @@ class MythicAPI:
 
     @staticmethod
     def list(db: Session, limit: int = 100, offset: int = 0):
-        return DatabaseUtils.limited_results(db, MythicRaceModel, limit=limit, offset=offset)
+        return DatabaseUtils.limited_results_query(db.query(MythicRaceModel).order_by(MythicRaceModel.id.desc()), limit=limit, offset=offset)
 
     @staticmethod
     def by_hash(db: Session, mythic_hash: str):

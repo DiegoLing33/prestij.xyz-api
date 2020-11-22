@@ -99,7 +99,7 @@ def get_posts_all(limit: int = 100, offset: int = 0):
     response_model=PostAPIListResponse,
     summary='Returns the posts in category'
 )
-def get_posts_all(category_url: str, limit: int = 100, offset: int = 0):
+def get_posts_all(category_url: int, limit: int = 100, offset: int = 0):
     """
     Returns all the posts by category
     :param category_url:
@@ -108,7 +108,7 @@ def get_posts_all(category_url: str, limit: int = 100, offset: int = 0):
     :return:
     """
     return PostsUtils.get_posts_by_category_limit(
-        url=category_url,
+        category_id=category_url,
         limit=limit,
         offset=offset
     )

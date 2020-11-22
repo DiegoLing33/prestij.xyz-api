@@ -9,6 +9,8 @@
 #  @site http://ling.black
 from typing import Optional
 
+from sqlalchemy import desc
+
 from blizzard.core import blizzard_db
 from database import DatabaseUtils
 from database.wow.models import PostCategoryModel, PostModel, PostCommentsModel, PostLikeModel
@@ -114,7 +116,7 @@ class PostsUtils:
         :return:
         """
         db = blizzard_db()
-        return DatabaseUtils.core_query(db.query(PostCategoryModel).order_by(PostModel.id.desc())).all()
+        return DatabaseUtils.core_query(db.query(PostCategoryModel)).all()
 
     @staticmethod
     def get_posts_limit(offset: int = 0, limit: int = 100):
@@ -139,7 +141,7 @@ class PostsUtils:
         """
         db = blizzard_db()
         return DatabaseUtils.limited_results_query(
-            db.query(PostModel).filter(PostModel.category_id == category_id).order_by(PostModel.id.desc()),
+            db.query(PostModel).filter(PostModel.category_id == category_id).order_by(desc(PostModel.id)),
             offset=offset,
             limit=limit
         )

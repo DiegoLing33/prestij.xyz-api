@@ -16,6 +16,8 @@ from database.client import DataStore
 from database.schemas import DataStore as DataStoreType
 from database.wow.models import CharacterModel
 
+from os import walk
+
 router = APIRouter()
 
 
@@ -73,6 +75,18 @@ def guild_get_activity(db=Depends(get_db)):
         },
         'players': a_players
     }
+
+
+@router.get(
+    '/logs',
+    summary='Returns the list of the logs files'
+)
+def guild_logs():
+    f = []
+    for (_, _, filenames) in walk('static/logs'):
+        f.extend(filenames)
+        break
+    return f
 
 
 @router.get(
