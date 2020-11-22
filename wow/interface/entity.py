@@ -10,7 +10,7 @@
 from datetime import datetime
 from typing import Optional, List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 CharacterEquipmentTypesList = [
     "HEAD", "NECK", "SHOULDER", "CHEST", "SHIRT"
@@ -219,7 +219,11 @@ class BlizzardUserCreate(BlizzardUserBase):
 class BlizzardUser(BlizzardUserBase):
     id: int
     blizzard_id: int
-    created: datetime
+    created: str
+
+    @validator("created", pre=True)
+    def parse_created(cls, value):
+        return value.strftime("%d.%m.%Y %H:%I:%S")
 
     class Config:
         orm_mode = True
@@ -245,8 +249,12 @@ class PostComment(PostCommentBase):
 
     user_id: int
 
-    created: datetime
+    created: str
     user: BlizzardUser
+
+    @validator("created", pre=True)
+    def parse_created(cls, value):
+        return value.strftime("%d.%m.%Y %H:%I:%S")
 
     class Config:
         orm_mode = True
@@ -270,9 +278,13 @@ class PostCategory(PostCategoryBase):
     id: int
 
     user_id: int
-    created: datetime
+    created: str
 
     user: BlizzardUser
+
+    @validator("created", pre=True)
+    def parse_created(cls, value):
+        return value.strftime("%d.%m.%Y %H:%I:%S")
 
     class Config:
         orm_mode = True
@@ -319,15 +331,19 @@ class PostCreate(PostBase):
 
 
 class Post(PostBase):
-    id:int
+    id: int
 
     user_id: int
-    created: datetime
+    created: str
 
     category: PostCategory
     likes: List[PostLike]
     comments: List[PostComment]
     user: BlizzardUser
+
+    @validator("created", pre=True)
+    def parse_created(cls, value):
+        return value.strftime("%d.%m.%Y %H:%I:%S")
 
     class Config:
         orm_mode = True
