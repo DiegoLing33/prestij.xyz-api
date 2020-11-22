@@ -114,7 +114,7 @@ class PostsUtils:
         :return:
         """
         db = blizzard_db()
-        return DatabaseUtils.core_query(db.query(PostCategoryModel)).all()
+        return DatabaseUtils.core_query(db.query(PostCategoryModel).order_by(PostModel.id.desc())).all()
 
     @staticmethod
     def get_posts_limit(offset: int = 0, limit: int = 100):
@@ -125,7 +125,7 @@ class PostsUtils:
         :return:
         """
         db = blizzard_db()
-        return DatabaseUtils.limited_results_query(db.query(PostModel), offset=offset, limit=limit)
+        return DatabaseUtils.limited_results_query(db.query(PostModel).order_by(PostModel.id.desc()), offset=offset, limit=limit)
 
     @staticmethod
     def get_posts_by_category_limit(category_id: int, offset: int = 0, limit: int = 100):
@@ -139,7 +139,7 @@ class PostsUtils:
         """
         db = blizzard_db()
         return DatabaseUtils.limited_results_query(
-            db.query(PostModel).filter(PostModel.category_id == category_id),
+            db.query(PostModel).filter(PostModel.category_id == category_id).order_by(PostModel.id.desc()),
             offset=offset,
             limit=limit
         )
