@@ -127,7 +127,8 @@ class PostsUtils:
         :return:
         """
         db = blizzard_db()
-        return DatabaseUtils.limited_results_query(db.query(PostModel).order_by(PostModel.id.desc()), offset=offset, limit=limit)
+        return DatabaseUtils.limited_results_query(db.query(PostModel).order_by(PostModel.id.desc()), offset=offset,
+                                                   limit=limit)
 
     @staticmethod
     def get_posts_by_category_limit(category_id: int, offset: int = 0, limit: int = 100):
@@ -142,6 +143,23 @@ class PostsUtils:
         db = blizzard_db()
         return DatabaseUtils.limited_results_query(
             db.query(PostModel).filter(PostModel.category_id == category_id).order_by(desc(PostModel.id)),
+            offset=offset,
+            limit=limit
+        )
+
+    @staticmethod
+    def get_posts_by_blizzard_id(blizzard_id: int, offset: int = 0, limit: int = 100):
+        """
+        Returns the posts by blizzard id
+
+        :param blizzard_id:
+        :param offset:
+        :param limit:
+        :return:
+        """
+        db = blizzard_db()
+        return DatabaseUtils.limited_results_query(
+            db.query(PostModel).filter(PostModel.user_id == blizzard_id).order_by(desc(PostModel.id)),
             offset=offset,
             limit=limit
         )

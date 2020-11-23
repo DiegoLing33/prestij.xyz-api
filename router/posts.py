@@ -114,6 +114,26 @@ def get_posts_all(category_url: int, limit: int = 100, offset: int = 0):
     )
 
 
+@router.get(
+    "/user/{blizzard_id}",
+    response_model=PostAPIListResponse,
+    summary='Returns the posts by users'
+)
+def get_posts_all(blizzard_id: int, limit: int = 100, offset: int = 0):
+    """
+    Returns all the posts by category
+    :param blizzard_id:
+    :param limit:
+    :param offset:
+    :return:
+    """
+    return PostsUtils.get_posts_by_blizzard_id(
+        blizzard_id=blizzard_id,
+        limit=limit,
+        offset=offset
+    )
+
+
 @router.post(
     "/like",
     summary='Likes the post'
