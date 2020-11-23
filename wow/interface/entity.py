@@ -225,6 +225,10 @@ class BlizzardUser(BlizzardUserBase):
     def parse_created(cls, value):
         return value.strftime("%d.%m.%Y %H:%I:%S")
 
+    @validator("blizzard_name", pre=True)
+    def parse_created(cls, value):
+        return value.split("#")[0]
+
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True
