@@ -47,6 +47,11 @@ class BlizzardUsersUtils:
         return blizzard_id
 
     @staticmethod
+    def get(blizzard_id: int):
+        db = blizzard_db()
+        return DatabaseUtils.core_query(db.query(BlizzardUserModel.blizzard_id == blizzard_id)).first()
+
+    @staticmethod
     def add(blizzard_id: int, blizzard_name: str):
         """
         Adds the blizzard user

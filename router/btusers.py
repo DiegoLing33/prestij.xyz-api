@@ -32,3 +32,17 @@ def add_user(body: BlizzardUserCreate):
         blizzard_id=blizzard_id,
         blizzard_name=body.blizzard_name
     )
+
+
+@router.get(
+    "/{blizzard_id}",
+    response_model=BlizzardUser,
+    summary="Returns the blizzard user by id"
+)
+def get_user(blizzard_id: int):
+    """
+    Returns blizzard user utils
+    :param blizzard_id:
+    :return:
+    """
+    return BlizzardUsersUtils.get(blizzard_id)
