@@ -226,7 +226,7 @@ class BlizzardUser(BlizzardUserBase):
         return value.strftime("%d.%m.%Y %H:%I:%S")
 
     @validator("blizzard_name", pre=True)
-    def parse_created(cls, value):
+    def parse_name(cls, value):
         return value.split("#")[0]
 
     class Config:
