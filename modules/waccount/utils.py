@@ -42,6 +42,7 @@ class WAccountUtils:
                 wow_id=account['id'],
                 name=account['name'],
                 realm_id=account['realm']['id'],
+                realm_title=account['realm']['name'],
                 level=account['level'],
                 faction=account['faction']['type']
             )
@@ -52,11 +53,13 @@ class WAccountUtils:
             wow_id: int,
             name: str,
             realm_id: int,
+            realm_title: str,
             level: int,
             faction: str
     ):
         """
         Adds the character
+        :param realm_title:
         :param blizzard_id:
         :param wow_id:
         :param name:
@@ -75,6 +78,7 @@ class WAccountUtils:
             q.update({
                 'name': name,
                 'realm_id': realm_id,
+                'realm_title': realm_title,
                 'level': level,
                 'faction': faction,
             })
@@ -85,6 +89,7 @@ class WAccountUtils:
                 wow_id=wow_id,
                 name=name,
                 realm_id=realm_id,
+                realm_title=realm_title,
                 level=level,
                 faction=faction
             ))

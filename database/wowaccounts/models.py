@@ -23,6 +23,7 @@ class WAccountModel(Base, CoreModel):
     wow_id = Column(Integer)
     name = Column(String)
     realm_id = Column(Integer)
+    realm_title = Column(String)
     level = Column(Integer)
     faction = Column(String)
     user = relationship(BlizzardUserModel)

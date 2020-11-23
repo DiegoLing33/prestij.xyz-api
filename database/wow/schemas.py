@@ -9,13 +9,14 @@
 #  @site http://ling.black
 from pydantic.main import BaseModel
 
-from database.wow.models import BlizzardUserModel
+from wow.interface.entity import BlizzardUser
 
 
 class WAccountBase(BaseModel):
     wow_id: int
     name: str
     realm_id: int
+    realm_title: int
     level: int
     faction: str
 
@@ -28,4 +29,8 @@ class WAccount(WAccountBase):
     id: int
     state: int
     user_id: int
-    user: BlizzardUserModel
+    user: BlizzardUser
+
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True
