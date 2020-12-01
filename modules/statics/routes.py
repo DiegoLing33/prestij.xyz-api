@@ -93,6 +93,7 @@ def add_player(body: AcceptCreate):
     if q.count() < 1:
         raise HTTPException(404, 'You have not got this player')
     q.update({'request_state': 2})
+    db.commit()
     return True
 
 # {
