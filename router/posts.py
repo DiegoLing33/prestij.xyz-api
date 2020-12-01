@@ -7,6 +7,16 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
+
+#  ██╗░░░░░██╗███╗░░██╗░██████╗░░░░██████╗░██╗░░░░░░█████╗░░█████╗░██╗░░██╗
+#  ██║░░░░░██║████╗░██║██╔════╝░░░░██╔══██╗██║░░░░░██╔══██╗██╔══██╗██║░██╔╝
+#  ██║░░░░░██║██╔██╗██║██║░░██╗░░░░██████╦╝██║░░░░░███████║██║░░╚═╝█████═╝░
+#  ██║░░░░░██║██║╚████║██║░░╚██╗░░░██╔══██╗██║░░░░░██╔══██║██║░░██╗██╔═██╗░
+#  ███████╗██║██║░╚███║╚██████╔╝░░░██████╦╝███████╗██║░░██║╚█████╔╝██║░╚██╗
+#  ╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░░░╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝
+#
+#  Developed by Yakov V. Panov (C) Ling • Black 2020
+#  @site http://ling.black
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -136,7 +146,8 @@ def get_posts_all(blizzard_id: int, limit: int = 100, offset: int = 0):
 
 @router.post(
     "/like",
-    summary='Likes the post'
+    summary='Likes the post',
+    tags=['Лайки']
 )
 def like_post(body: PostLikeCreate):
     blizzard_id = BlizzardUsersUtils.id__safe(body.token)
@@ -148,7 +159,8 @@ def like_post(body: PostLikeCreate):
 
 @router.post(
     "/unlike",
-    summary='Unlikes the post'
+    summary='Unlikes the post',
+    tags=['Лайки']
 )
 def like_post(body: PostLikeCreate):
     blizzard_id = BlizzardUsersUtils.id__safe(body.token)
@@ -160,7 +172,8 @@ def like_post(body: PostLikeCreate):
 
 @router.post(
     "/comment",
-    summary='Adds the comment'
+    summary='Adds the comment',
+    tags=['Комментарии']
 )
 def like_post(body: PostCommentCreate):
     blizzard_id = BlizzardUsersUtils.id__safe(body.token)
@@ -174,7 +187,8 @@ def like_post(body: PostCommentCreate):
 
 @router.delete(
     "/comment",
-    summary='Removes the comment'
+    summary='Removes the comment',
+    tags=['Комментарии']
 )
 def removes_post(body: CommentIdAndToken, db=Depends(get_db)):
     blizzard_id = BlizzardUsersUtils.id__safe(body.token)

@@ -7,30 +7,34 @@
 #
 #  Developed by Yakov V. Panov (C) Ling • Black 2020
 #  @site http://ling.black
-from pydantic.main import BaseModel
+from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy.orm import relationship
 
-from wow.interface.entity import BlizzardUser
-
-
-class WAccountBase(BaseModel):
-    wow_id: int
-    name: str
-    realm_id: int
-    realm_title: str
-    level: int
-    faction: str
+from database import Base
+from database.core.models import CoreModel
+from database.wow.models import CharacterModel
 
 
-class WAccountCreate(WAccountBase):
-    user_id: int
+class StaticMemberModel(Base, CoreModel):
+    __tablename__ = "static_members"
+    static_id = Column(Integer, ForeignKey("static_index.id"))
+    request_state = Column(Integer, default=1)
+    request_comment = Column(String)
+    role_id = Column(Integer)
+
+    wow_id = Column(Integer, ForeignKey("characters.wow_id"))
+    blizzard_id = Column(Integer)
+    character = relationship(CharacterModel)
+
+    static = relationship("StaticIndexModel", back_populates="members")
 
 
-class WAccount(WAccountBase):
-    id: int
-    state: int
-    user_id: int
-    user: BlizzardUser
+class StaticIndexModel(Base, CoreModel):
+    __tablename__ = "static_index"
 
-    class Config:
-        orm_mode = True
-        arbitrary_types_allowed = True
+    title = Column(String)
+    description = Column(String)
+    image = Column(String)
+    owner_blizzard_id = Column(Integer)
+
+    members = relationship(StaticMemberModel, back_populates="static")

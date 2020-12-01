@@ -14,29 +14,45 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
 from config import app_server, app_port
-from router import character, guild, mythic, btusers, files
-from router import posts
+from router import character, guild, mythic, btusers, files, posts
 from database.database import engine, Base
 from middleware import use_content_type
+from modules.statics.routes import router as statics_router
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="Ling API Service",
-    description="This is example of the Ling API Service",
+    title="Престиж WoW API",
+    description="API Проекта гильдии World Of Warcraft \"Престиж\"",
     version="1.0.0",
     openapi_tags=[
         {
-            "name": "users",
-            "description": "User API methods"
+            "name": "Пользователи",
+            "description": "API методы связанные с пользователями в обвязке BlizzardAPI"
         },
         {
-            "name": "groups",
-            "description": "User role groups API methods"
+            "name": "Гильдия",
+            "description": "API методы для получения актуальной информации о гильдии"
         },
         {
-            "name": "auth",
-            "description": "Authorization API methods"
+            "name": "Мифик",
+            "description": "API методы для получения информации о прохождении Мифик+ подземелий"
+        },
+        {
+            "name": "Персонажи",
+            "description": "API методы для получения участников гильдии"
+        },
+        {
+            "name": "Записи",
+            "description": "Функциональная часть приложения - записи"
+        },
+        {
+            "name": "Файлы",
+            "description": "Функциональная часть приложения - файлы"
+        },
+        {
+            "name": "Статики",
+            "description": "Методы для получения информации про игровые статики"
         }
     ]
 )
@@ -59,33 +75,38 @@ app.add_middleware(
 app.include_router(
     character.router,
     prefix="/characters",
-    tags=['wow']
+    tags=['Персонажи']
 )
 
 app.include_router(
     guild.router,
     prefix="/guild",
-    tags=['wow']
+    tags=['Гильдия']
 )
 app.include_router(
     mythic.router,
     prefix="/mythic",
-    tags=['wow']
+    tags=['Мифик']
 )
 app.include_router(
     posts.router,
     prefix="/posts",
-    tags=['wow']
+    tags=['Записи']
 )
 app.include_router(
     btusers.router,
     prefix="/users",
-    tags=['wow']
+    tags=['Пользователи']
 )
 app.include_router(
     files.router,
     prefix="/files",
-    tags=['wow']
+    tags=['Файлы']
+)
+app.include_router(
+    statics_router,
+    prefix="/statics",
+    tags=['Статики']
 )
 
 app.mount("/static", StaticFiles(directory="static"))
